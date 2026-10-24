@@ -41,23 +41,22 @@ jobs:
             name: Mocha-Test-Result
             path: test-results.xml
     docker:
-         name: to login into docker 
-         runs-on: ubuntu-latest
-         steps:
-          - name: 
-            uses: docker/login-action@v4
-            with:
-              registry: ghrc.io
-              username: ${{ github.actor }}
-              password: ${{ secrets.GITHUB_TOKEN }}
-       
-          - name:
-            uses: docker/build-push-action
-            with:
-              tag: ghcr.io/{SahilMankumbare}/solar-system:{githubSHA}
-
-
-
+     runs-on: ubuntu-latest
+     needs:
+    
+     - unit-testing
+     steps:
+     - uses: actions/checkout@v4
+     - uses: docker/login-action@v3
+       with:
+        registry: ghcr.io
+        username: '${{ github.repository_owner }}'
+        password: '${{ secrets.GITHUB_TOKEN }}'
+     - uses: docker/build-push-action@v6
+       with:
+        context: .
+        push: true
+        tags: 'ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}'
 
 
         
