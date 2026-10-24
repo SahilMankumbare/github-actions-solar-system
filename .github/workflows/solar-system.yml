@@ -41,9 +41,9 @@ jobs:
             name: Mocha-Test-Result
             path: test-results.xml
     docker:
-      - name: to login into docker 
-        runs-on: ubuntu-latest
-        steps:
+         name: to login into docker 
+         runs-on: ubuntu-latest
+         steps:
           - name: 
             uses: docker/login-action@v4
             with:
@@ -57,7 +57,7 @@ jobs:
               tag: ghcr.io/{SahilMankumbare}/solar-system:{githubSHA}
 
 
-              
+
 
 
         
